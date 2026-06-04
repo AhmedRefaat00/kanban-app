@@ -1,12 +1,11 @@
-import { Component, input, inject, signal } from '@angular/core';
+import { Component, input, inject } from '@angular/core';
 import { BoardBtn } from '../../components/board-btn/board-btn';
-import { UpperCasePipe, AsyncPipe } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
 import { BoardsService } from '../../services/boards.service';
-
 
 @Component({
   selector: 'app-sidebar',
-  imports: [UpperCasePipe, AsyncPipe, BoardBtn],
+  imports: [UpperCasePipe, BoardBtn],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
 })
@@ -14,18 +13,15 @@ export class Sidebar {
   logo = input('');
 
   boardsService = inject(BoardsService);
-  boards = signal([]) as any;
+  boards = this.boardsService.boards;
 
-
-  ngOnInit() {
-    this.boardsService.getBoards().subscribe(boards => {
-      console.log(boards);
-      this.boards.set(boards as any);
-    });
-  }
-
-  onCreateNewBoard(){
-    
-    
+  onCreateNewBoard() {
+    const name = prompt('Enter new board name:');
+    if (name && name.trim()) {
+      this.boardsService.createBoard({
+        name: name.trim(),
+        columns: []
+      });
+    }
   }
 }

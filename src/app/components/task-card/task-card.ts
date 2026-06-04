@@ -18,7 +18,7 @@ export class TaskCard {
 
   toggleSubtask(subtask: any) {
     subtask.isCompleted = !subtask.isCompleted;
-    // this.boardService.updateTask(this.task(),this.task().id);
+    this.boardService.save();
   }
 
 }

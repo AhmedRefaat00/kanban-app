@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { input } from '@angular/core';
+import { BoardsService } from '../../services/boards.service';
 
 @Component({
   selector: 'app-board-btn',
@@ -10,8 +11,12 @@ import { input } from '@angular/core';
 })
 export class BoardBtn {
   board = input({} as any);
+  boardsService = inject(BoardsService);
 
-  isActive = false;
+  isActive = computed(() => {
+    return this.boardsService.activeBoardId() === this.board().id;
+  });
+
   onClick() {
     // console.log(this.board());
   }

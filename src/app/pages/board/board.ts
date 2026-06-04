@@ -1,5 +1,4 @@
-import { Component, effect, input, inject, signal } from '@angular/core';
-import { take } from 'rxjs';
+import { Component, computed, effect, input, inject, signal } from '@angular/core';
 import { BoardsService } from '../../services/boards.service';
 import { TaskCard } from '../../components/task-card/task-card';
 
@@ -12,23 +11,22 @@ import { TaskCard } from '../../components/task-card/task-card';
 export class Board {
   id = input<number>(0);
   boardsService = inject(BoardsService);
-  board = signal<any>(null);
+  
+  board = computed(() => {
+    const boardId = Number(this.id());
+    if (!boardId || boardId <= 0) {
+      return null;
+    }
+    return this.boardsService.getBoard(boardId);
+  });
+
   activeTaskTitle = signal<string | null>(null);
 
   constructor() {
     effect(() => {
-      const boardId = this.id();
-
-      if (!boardId || boardId <= 0) {
-        this.board.set(null);
-        return;
-      }
-
-      this.boardsService
-        .getBoard(boardId)
-        .pipe(take(1))
-        .subscribe((board) => this.board.set(board));
-    });
+      const boardId = Number(this.id());
+      this.boardsService.activeBoardId.set(boardId > 0 ? boardId : null);
+    }, { allowSignalWrites: true });
   }
 
   toggleActiveTask(title: string) {
@@ -36,9 +34,4 @@ export class Board {
       this.activeTaskTitle() === title ? null : title
     );
   }
-
-
-
-
-
 }
