@@ -1,0 +1,26 @@
+<div class="sidebar">
+  <div>
+    <img class="logo" [src]="logo()" alt="Logo">
+    <p>{{ 'All Boards' | uppercase }} ({{ boards().length }}) </p>
+    <div class="boards">
+      @for(board of boards(); track board.id)
+      {
+      <app-board-btn [board]="board" />
+      }
+    </div>
+    <button (click)="onCreateNewBoard()">{{ 'Create New Board' }}</button>
+  </div>
+  <div>
+    <div>
+      <img src="icon-light-theme.svg" alt="Light Theme Icon">
+      <input type="radio" id="light" name="theme" value="light" checked>
+      <img src="icon-dark-theme.svg" alt="Dark Theme Icon">
+    </div>
+
+    <button >
+      <img src="icon-hide-sidebar.svg" />
+      hideSidebar
+    </button>
+  </div>
+
+</div>

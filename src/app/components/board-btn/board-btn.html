@@ -1,0 +1,4 @@
+<a routerLink="/board/{{board().id}}" [class.active]="isActive" (click)="onClick()">
+  <img src="icon-board.svg" alt="Board Icon">
+  {{board().name}}
+</a>

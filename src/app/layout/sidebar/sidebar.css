@@ -1,0 +1,38 @@
+.sidebar {
+  width: 250px;
+  background-color: var(--bg-surface);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+}
+
+.sidbar div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.sidebar .logo {
+  padding: 20px;
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.sidebar p {
+  padding-left: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: var(--medium-grey);
+}
+
+.boards {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: var(--text-color);
+  width: 100%;
+
+}

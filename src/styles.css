@@ -1,1 +1,95 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* استيراد خط التطبيق الأساسي */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap');
+
+:root {
+  /* ================= الألوان الأساسية الثابتة ================= */
+  --main-purple: #635FC7;
+  --main-purple-hover: #A8A4FF;
+  --black: #000112;
+  --very-dark-grey: #20212C;
+  --dark-grey: #2B2C37;
+  --lines-dark: #3E3F4E;
+  --medium-grey: #828FA3;
+  --lines-light: #E4EBFA;
+  --light-grey: #F4F7FD;
+  --white: #FFFFFF;
+  --red: #EA5555;
+  --red-hover: #FF9898;
+
+  /* ================= إعدادات الخط ================= */
+  --font-family: 'Plus Jakarta Sans', sans-serif;
+
+  /* ================= متغيرات الوضع الفاتح (الافتراضي) ================= */
+  --bg-layout: var(--light-grey);
+  --bg-surface: var(--white);
+  --text-primary: var(--black);
+  --border-color: var(--lines-light);
+}
+
+/* ================= متغيرات الوضع المظلم ================= */
+/* عندما نضيف كلاس dark لوسم html، ستتغير هذه القيم تلقائياً */
+.dark {
+  --bg-layout: var(--very-dark-grey);
+  --bg-surface: var(--dark-grey);
+  --text-primary: var(--white);
+  --border-color: var(--lines-dark);
+}
+
+/* ================= الأنماط الأساسية للصفحة ================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-layout);
+  color: var(--text-primary);
+  /* انتقال ناعم عند تبديل الوضع المظلم */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ================= كلاسات مساعدة للنصوص (Typography) ================= */
+.heading-xl {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+}
+
+.heading-l {
+  font-size: 18px;
+  line-height: 23px;
+  font-weight: 700;
+}
+
+.heading-m {
+  font-size: 15px;
+  line-height: 19px;
+  font-weight: 700;
+}
+
+.heading-s {
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+}
+
+.body-l {
+  font-size: 13px;
+  line-height: 23px;
+  font-weight: 500;
+}
+
+.body-m {
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 700;
+}
+
+/* global styles */

@@ -1,0 +1,42 @@
+<div class="overlay">
+  <div class="modal" (click)="closeCard()">
+    <div class="modal-header">
+      <h2>{{ task().title }}</h2>
+      <button class="edit-btn">
+        <img src="icon-vertical-ellipsis.svg">
+      </button>
+    </div>
+
+    <div class="modal-content">
+      @if(task().description)
+      {
+      <p class="description">{{ task().description }}</p>
+      }
+
+      @if(task().subtasks?.length)
+      {
+      <div class="subtasks-section">
+        <h3>Subtasks ({{ task().subtasks.filter(s => s.isCompleted).length }} of {{ task().subtasks.length }})</h3>
+        <div class="subtasks-list">
+          @for(subtask of task().subtasks; track subtask.title)
+          {
+          <label class="subtask-item">
+            <input type="checkbox" [checked]="subtask.isCompleted" (change)="toggleSubtask(subtask)" />
+            <span [class.completed]="subtask.isCompleted">{{ subtask.title }}</span>
+          </label>
+          }
+        </div>
+      </div>
+      }
+
+      <div class="status-section">
+        <label>Current Status</label>
+        <select class="status-select">
+          <option>Doing</option>
+          <option>Todo</option>
+          <option>Done</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

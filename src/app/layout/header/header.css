@@ -1,0 +1,33 @@
+.header {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0px 20px;
+  text-align: center;
+
+}
+
+button {
+  background-color: var(--main-purple);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--main-purple-hover);
+}
+
+img {
+  margin-left: 20px;
+
+
+  cursor: pointer;
+}

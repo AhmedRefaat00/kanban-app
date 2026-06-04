@@ -1,0 +1,76 @@
+.board {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-height: 100vh;
+  gap: 20px;
+  padding: 20px;
+
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 300px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+
+}
+
+.column h2 {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+
+}
+
+.task {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 14px;
+  background-color: #f7f8fb;
+  border-radius: 12px;
+  border: 1px solid #e4e7f0;
+
+}
+
+.task h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.task-description {
+  margin: 0 0 10px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.task-meta {
+  margin: 0;
+  color: #777;
+  font-size: 0.88rem;
+}
+
+.empty-column,
+.empty-board {
+  margin: 0;
+  color: #71717a;
+  font-size: 0.95rem;
+
+}

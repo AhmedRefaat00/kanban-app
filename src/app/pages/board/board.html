@@ -1,0 +1,51 @@
+<div class="board">
+  @if(board()?.columns?.length)
+  {
+  @for(column of board().columns; track column.name)
+  {
+  <section class="column">
+    <h2>{{ column.name }}</h2>
+
+    @if(column.tasks?.length)
+    {
+    <div class="tasks">
+      @for(task of column.tasks; track task.title)
+      {
+      <article class="task" (click)="toggleActiveTask(task.title)">
+        <div class="task-header">
+          <h3>{{ task.title }}</h3>
+
+          @if(task.subtasks?.length)
+          {
+          <p class="task-meta">
+            {{ task.subtasks.filter(st => st.isCompleted).length }} of {{ task.subtasks.length }} subtasks completed
+          </p>
+          }
+        </div>
+
+        @if(activeTaskTitle() === task.title)
+        {
+        <app-task-card [task]="task" (closeClicked)="activeTaskTitle.set(null)" />
+        }
+      </article>
+      }
+    </div>
+    }
+    @else
+    {
+    <p class="empty-column">No tasks in this column yet.</p>
+    }
+  </section>
+  }
+  }
+  @else
+  {
+  <p class="empty-board">No board data available.</p>
+  }
+
+  <div>
+    <p>add new column</p>
+  </div>
+
+
+</div>
