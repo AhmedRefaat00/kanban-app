@@ -1,10 +1,11 @@
 import { Component, computed, effect, input, inject, signal } from '@angular/core';
 import { BoardsService } from '../../services/boards.service';
 import { TaskCard } from '../../components/task-card/task-card';
+import { AddNewBoardCard } from "../../components/add-new-board-card/add-new-board-card";
 
 @Component({
   selector: 'app-board',
-  imports: [TaskCard],
+  imports: [TaskCard, AddNewBoardCard],
   templateUrl: './board.html',
   styleUrl: './board.css',
 })

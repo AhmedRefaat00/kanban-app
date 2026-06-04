@@ -8,7 +8,7 @@
       <app-board-btn [board]="board" />
       }
     </div>
-    <button (click)="onCreateNewBoard()">{{ 'Create New Board' }}</button>
+    <button (click)="isCreateNewBoardClicked.set(!isCreateNewBoardClicked())">{{ 'Create New Board' }}</button>
   </div>
   <div>
     <div>
@@ -17,10 +17,14 @@
       <img src="icon-dark-theme.svg" alt="Dark Theme Icon">
     </div>
 
-    <button >
+    <button>
       <img src="icon-hide-sidebar.svg" />
       hideSidebar
     </button>
   </div>
 
 </div>
+
+@if (isCreateNewBoardClicked()) {
+  <app-add-new-board-card (close)="isCreateNewBoardClicked.set(false)"></app-add-new-board-card>
+}

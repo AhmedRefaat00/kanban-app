@@ -1,1 +1,43 @@
-<p>add-new-board-card works!</p>
+<div class="overlay" (click)="onBackdropClick($event)">
+  <div class="modal">
+    <h3>Add New Board</h3>
+    <form (submit)="onSubmit($event)">
+      <div class="form-group">
+        <label for="board-name">Board Name</label>
+        <input 
+          id="board-name"
+          class="input" 
+          type="text" 
+          [value]="boardName()" 
+          (input)="boardName.set($any($event.target).value)"
+          placeholder="e.g. Web Design" 
+          required 
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Board Columns</label>
+        <div class="columns-list">
+          @for (column of columns(); track $index) {
+            <div class="column-row">
+              <input 
+                type="text" 
+                [value]="column" 
+                (input)="updateColumn($index, $any($event.target).value)"
+                placeholder="e.g. Todo" 
+                required
+              />
+              <button type="button" class="remove-column-btn" (click)="removeColumn($index)">
+                <img src="icon-cross.svg" alt="Remove Column">
+              </button>
+            </div>
+          }
+        </div>
+        <button class="btn btn-secondary" type="button" (click)="addColumn()">+ Add New Column</button>
+      </div>
+
+      <button class="btn btn-primary" type="submit">Create New Board</button>
+    </form>
+  </div>
+</div>
+
