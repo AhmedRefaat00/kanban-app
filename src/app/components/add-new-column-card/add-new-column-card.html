@@ -1,0 +1,22 @@
+<div class="overlay" (click)="onBackdropClick($event)">
+  <div class="modal">
+    <h3>Add New Column</h3>
+    <form (submit)="onSubmit($event)">
+      <div class="form-group">
+        <label for="column-name">Column Name</label>
+        <input 
+          id="column-name"
+          class="input" 
+          type="text" 
+          [value]="columnName()" 
+          (input)="columnName.set($any($event.target).value)"
+          placeholder="e.g. In Review" 
+          required 
+          autofocus
+        />
+      </div>
+
+      <button class="btn btn-primary" type="submit">Create Column</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,136 @@
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Modal Overlay Backdrop */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Modal Content Card */
+.modal {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  width: 480px;
+  max-width: 90vw;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  max-height: 90vh;
+  overflow-y: auto;
+  font-family: var(--font-family);
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Typography */
+h3 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 18px;
+  line-height: 23px;
+  font-weight: 700;
+}
+
+.form-group {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--medium-grey);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Input Fields */
+input {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 13px;
+  line-height: 23px;
+  font-family: var(--font-family);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input::placeholder {
+  color: var(--medium-grey);
+  opacity: 0.25;
+}
+
+input:hover {
+  border-color: var(--main-purple);
+}
+
+input:focus {
+  border-color: var(--main-purple);
+  box-shadow: 0 0 0 3px rgba(99, 95, 199, 0.15);
+}
+
+/* Custom Buttons */
+.btn {
+  width: 100%;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 23px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: var(--font-family);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* Primary Button */
+.btn-primary {
+  background-color: var(--main-purple);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--main-purple-hover);
+}

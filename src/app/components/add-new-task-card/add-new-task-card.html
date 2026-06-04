@@ -1,0 +1,68 @@
+<div class="overlay" (click)="onBackdropClick($event)">
+  <div class="modal">
+    <h3>Add New Task</h3>
+    <form (submit)="onSubmit($event)">
+      <div class="form-group">
+        <label for="task-title">Title</label>
+        <input 
+          id="task-title"
+          class="input" 
+          type="text" 
+          [value]="title()" 
+          (input)="title.set($any($event.target).value)"
+          placeholder="e.g. Take a coffee break" 
+          required 
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="task-description">Description</label>
+        <textarea 
+          id="task-description"
+          class="textarea" 
+          [value]="description()" 
+          (input)="description.set($any($event.target).value)"
+          placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
+          rows="4"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Subtasks</label>
+        <div class="subtasks-list">
+          @for (subtask of subtasks(); track $index) {
+            <div class="subtask-row">
+              <input 
+                type="text" 
+                [value]="subtask" 
+                (input)="updateSubtask($index, $any($event.target).value)"
+                placeholder="e.g. Make coffee" 
+                required
+              />
+              <button type="button" class="remove-subtask-btn" (click)="removeSubtask($index)">
+                <img src="icon-cross.svg" alt="Remove Subtask">
+              </button>
+            </div>
+          }
+        </div>
+        <button class="btn btn-secondary" type="button" (click)="addSubtask()">+ Add New Subtask</button>
+      </div>
+
+      <div class="form-group">
+        <label for="task-status">Status</label>
+        <select 
+          id="task-status" 
+          class="select"
+          [value]="status()" 
+          (change)="status.set($any($event.target).value)"
+        >
+          @for (colName of activeBoardColumns(); track colName) {
+            <option [value]="colName">{{ colName }}</option>
+          }
+        </select>
+      </div>
+
+      <button class="btn btn-primary" type="submit">Create Task</button>
+    </form>
+  </div>
+</div>

@@ -8,23 +8,26 @@
       <app-board-btn [board]="board" />
       }
     </div>
-    <button (click)="isCreateNewBoardClicked.set(!isCreateNewBoardClicked())">{{ 'Create New Board' }}</button>
+    <button class="create-board-btn" (click)="isCreateNewBoardClicked.set(!isCreateNewBoardClicked())">
+      <img src="icon-board.svg" alt="Board Icon">
+      + Create New Board
+    </button>
   </div>
   <div>
-    <div>
+    <!-- <div>
       <img src="icon-light-theme.svg" alt="Light Theme Icon">
       <input type="radio" id="light" name="theme" value="light" checked>
       <img src="icon-dark-theme.svg" alt="Dark Theme Icon">
-    </div>
+    </div> -->
 
-    <button>
+    <!-- <button>
       <img src="icon-hide-sidebar.svg" />
       hideSidebar
-    </button>
+    </button> -->
   </div>
 
 </div>
 
 @if (isCreateNewBoardClicked()) {
-  <app-add-new-board-card (close)="isCreateNewBoardClicked.set(false)"></app-add-new-board-card>
+<app-add-new-board-card (close)="isCreateNewBoardClicked.set(false)"></app-add-new-board-card>
 }

@@ -43,10 +43,14 @@
   <p class="empty-board">No board data available.</p>
   }
 
-  <div>
-    <p>add new column</p>
+  <div class="add-column-card" (click)="isAddNewColumnClicked.set(true)">
+    <p class="add-column-text">+ New Column</p>
   </div>
 
-
 </div>
+
+@if (isAddNewColumnClicked()) {
+  <app-add-new-column-card (close)="isAddNewColumnClicked.set(false)"></app-add-new-column-card>
+}
+
 
