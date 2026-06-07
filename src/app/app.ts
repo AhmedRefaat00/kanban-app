@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Sidebar } from './layout/sidebar/sidebar';
 import { Header } from "./layout/header/header";
+import { BoardsService } from './services/boards.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,6 @@ import { Header } from "./layout/header/header";
   styleUrl: './app.css'
 })
 export class App {
-  logo = 'logo-dark.svg';
-  
+  boardsService = inject(BoardsService);
+  logo = computed(() => this.boardsService.isDarkMode() ? 'logo-light.svg' : 'logo-dark.svg');
 }

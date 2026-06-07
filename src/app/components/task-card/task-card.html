@@ -1,10 +1,18 @@
-<div class="overlay">
-  <div class="modal" (click)="closeCard()">
+<div class="overlay" (click)="closeCard()">
+  <div class="modal" (click)="$event.stopPropagation()">
     <div class="modal-header">
       <h2>{{ task().title }}</h2>
-      <button class="edit-btn">
-        <img src="icon-vertical-ellipsis.svg">
-      </button>
+      <div class="ellipsis-container">
+        <button class="edit-btn" (click)="toggleDropdown($event)">
+          <img src="icon-vertical-ellipsis.svg" alt="More Options">
+        </button>
+        @if (isDropdownOpen()) {
+          <div class="dropdown-menu">
+            <button (click)="onEditTask()">Edit Task</button>
+            <button class="delete-text" (click)="onDeleteTask()">Delete Task</button>
+          </div>
+        }
+      </div>
     </div>
 
     <div class="modal-content">
@@ -31,12 +39,20 @@
 
       <div class="status-section">
         <label>Current Status</label>
-        <select class="status-select">
-          <option>Doing</option>
-          <option>Todo</option>
-          <option>Done</option>
+        <select class="status-select" [value]="columnName()" (change)="onStatusChange($any($event.target).value)">
+          @for (colName of activeBoardColumns(); track colName) {
+            <option [value]="colName">{{ colName }}</option>
+          }
         </select>
       </div>
     </div>
   </div>
 </div>
+
+@if (isEditTaskClicked()) {
+  <app-add-new-task-card 
+    [task]="task()" 
+    [columnName]="columnName()" 
+    (close)="isEditTaskClicked.set(false)"
+  />
+}

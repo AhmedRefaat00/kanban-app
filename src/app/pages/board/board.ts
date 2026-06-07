@@ -1,12 +1,11 @@
 import { Component, computed, effect, input, inject, signal } from '@angular/core';
 import { BoardsService } from '../../services/boards.service';
 import { TaskCard } from '../../components/task-card/task-card';
-import { AddNewBoardCard } from "../../components/add-new-board-card/add-new-board-card";
 import { AddNewColumnCard } from "../../components/add-new-column-card/add-new-column-card";
 
 @Component({
   selector: 'app-board',
-  imports: [TaskCard, AddNewBoardCard, AddNewColumnCard],
+  imports: [TaskCard, AddNewColumnCard],
   templateUrl: './board.html',
   styleUrl: './board.css',
 })
@@ -24,7 +23,7 @@ export class Board {
     return this.boardsService.getBoard(boardId);
   });
 
-  activeTaskTitle = signal<string | null>(null);
+  activeTaskId = signal<number | null>(null);
 
   constructor() {
     effect(() => {
@@ -33,9 +32,9 @@ export class Board {
     }, { allowSignalWrites: true });
   }
 
-  toggleActiveTask(title: string) {
-    this.activeTaskTitle.set(
-      this.activeTaskTitle() === title ? null : title
+  toggleActiveTask(id: number) {
+    this.activeTaskId.set(
+      this.activeTaskId() === id ? null : id
     );
   }
 }

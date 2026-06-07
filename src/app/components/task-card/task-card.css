@@ -12,13 +12,16 @@
 }
 
 .modal {
-  background: white;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
   border-radius: 12px;
   width: 90%;
   max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  font-family: var(--font-family);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 
@@ -42,7 +45,7 @@
   border: none;
   font-size: 1.8rem;
   cursor: pointer;
-  color: #666;
+  color: var(--medium-grey);
   padding: 0;
   width: 28px;
   height: 28px;
@@ -53,7 +56,7 @@
 }
 
 .close-btn:hover {
-  color: #000;
+  color: var(--text-primary);
 }
 
 .modal-content {
@@ -64,7 +67,7 @@
 }
 
 .description {
-  color: #666;
+  color: var(--medium-grey);
   font-size: 0.95rem;
   line-height: 1.5;
   margin: 0;
@@ -72,9 +75,11 @@
 
 .subtasks-section h3 {
   margin: 0 0 12px;
-  font-size: 0.95rem;
-  color: #333;
-  font-weight: 600;
+  font-size: 12px;
+  color: var(--medium-grey);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .subtasks-list {
@@ -86,27 +91,36 @@
 .subtask-item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   cursor: pointer;
-  padding: 8px 10px;
+  padding: 12px;
   border-radius: 6px;
-  transition: background 0.15s;
+  background-color: var(--bg-layout);
+  transition: background-color 0.15s;
 }
 
 .subtask-item:hover {
-  background: var(--main-purple-hover);
+  background-color: rgba(99, 95, 199, 0.25);
 }
 
 .subtask-item input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
-  accent-color: #5b4fcf;
+  accent-color: var(--main-purple);
 }
 
 .subtask-item span {
-  font-size: 0.95rem;
-  color: #333;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  transition: color 0.2s;
+}
+
+.subtask-item span.completed {
+  text-decoration: line-through;
+  color: var(--medium-grey);
+  opacity: 0.6;
 }
 
 .status-section {
@@ -116,9 +130,11 @@
 }
 
 .status-section label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #333;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--medium-grey);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .completed {
@@ -127,17 +143,76 @@
 
 .status-select {
   padding: 10px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
-  font-size: 0.95rem;
-  background: white;
+  font-size: 13px;
+  font-family: var(--font-family);
+  background: transparent;
+  color: var(--text-primary);
   cursor: pointer;
   transition: border-color 0.2s;
+  width: 100%;
+  outline: none;
+}
+
+.status-select option {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
 }
 
 .status-select:hover,
 .status-select:focus {
-  outline: none;
-  border-color: #5b4fcf;
-  box-shadow: 0 0 0 2px rgba(91, 79, 207, 0.1);
+  border-color: var(--main-purple);
 }
+
+/* --- Ellipsis Action Dropdown --- */
+.ellipsis-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 32px;
+  right: 0;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+  z-index: 100;
+}
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 10px 16px;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-family);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--medium-grey);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-menu button:hover {
+  background-color: var(--bg-layout);
+  color: var(--main-purple);
+}
+
+.dropdown-menu button.delete-text {
+  color: var(--red);
+}
+
+.dropdown-menu button.delete-text:hover {
+  background-color: var(--bg-layout);
+  color: var(--red-hover);
+}
+

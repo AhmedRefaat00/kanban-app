@@ -1,26 +1,38 @@
 a {
-  display: block;
-  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  padding: 14px 24px;
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--medium-grey);
   border-radius: 0 50px 50px 0;
-  margin-right: 10px;
-  transition: background-color 0.3s ease;
+  margin-right: 24px;
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 700;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-
 a:hover {
-  background-color: var(--main-purple);
-  color:var(--bg-layout)
+  background-color: rgba(99, 95, 199, 0.1);
+  color: var(--main-purple);
 }
 
 a.active {
   background-color: var(--main-purple);
-  color: var(--bg-layout);
+  color: var(--white);
 }
 
-
 a img {
-  margin-right: 10px;
+  margin-right: 16px;
+  filter: invert(59%) sepia(11%) saturate(543%) hue-rotate(177deg) brightness(89%) contrast(87%);
+  transition: filter 0.2s ease;
+}
+
+a:hover img {
+  filter: invert(41%) sepia(51%) saturate(1476%) hue-rotate(212deg) brightness(87%) contrast(85%);
+}
+
+a.active img {
+  filter: brightness(0) invert(1);
 }
 

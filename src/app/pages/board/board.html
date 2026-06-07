@@ -9,9 +9,9 @@
     @if(column.tasks?.length)
     {
     <div class="tasks">
-      @for(task of column.tasks; track task.title)
+      @for(task of column.tasks; track task.id)
       {
-      <article class="task" (click)="toggleActiveTask(task.title)">
+      <article class="task" (click)="toggleActiveTask(task.id)">
         <div class="task-header">
           <h3>{{ task.title }}</h3>
 
@@ -23,9 +23,9 @@
           }
         </div>
 
-        @if(activeTaskTitle() === task.title)
+        @if(activeTaskId() === task.id)
         {
-        <app-task-card [task]="task" (closeClicked)="activeTaskTitle.set(null)" />
+        <app-task-card [task]="task" [columnName]="column.name" (closeClicked)="activeTaskId.set(null)" />
         }
       </article>
       }

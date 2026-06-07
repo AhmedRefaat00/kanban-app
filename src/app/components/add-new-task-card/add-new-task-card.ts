@@ -1,4 +1,4 @@
-import { Component, output, signal, inject, computed, effect } from '@angular/core';
+import { Component, output, signal, inject, computed, effect, input } from '@angular/core';
 import { BoardsService } from '../../services/boards.service';
 
 @Component({
@@ -11,6 +11,9 @@ export class AddNewTaskCard {
   boardsService = inject(BoardsService);
 
   close = output<void>();
+  task = input<any | null>(null);
+  columnName = input<string | null>(null);
+
   title = signal('');
   description = signal('');
   status = signal('');
@@ -23,9 +26,19 @@ export class AddNewTaskCard {
 
   constructor() {
     effect(() => {
-      const columns = this.activeBoardColumns();
-      if (columns.length > 0) {
-        this.status.set(columns[0]);
+      const t = this.task();
+      if (t) {
+        this.title.set(t.title);
+        this.description.set(t.description || '');
+        this.status.set(t.status || this.columnName() || '');
+        const subs = t.subtasks || [];
+        this.subtasks.set(subs.length > 0 ? subs.map((st: any) => st.title) : ['', '']);
+      } else {
+        // Fallback for creation mode
+        const columns = this.activeBoardColumns();
+        if (columns.length > 0) {
+          this.status.set(columns[0]);
+        }
       }
     }, { allowSignalWrites: true });
   }
@@ -60,29 +73,39 @@ export class AddNewTaskCard {
     const activeB = this.boardsService.activeBoard();
     if (!activeB) return;
 
-    const currentStatus = this.status();
-    const column = activeB.columns.find((c: any) => c.name === currentStatus);
-    if (!column) return;
-
+    const originalSubtasks = this.task() ? this.task().subtasks || [] : [];
     const subtasksData = this.subtasks()
       .map(st => st.trim())
       .filter(st => st !== '')
-      .map((st, idx) => ({ title: st, isCompleted: false, id: idx + 1 }));
+      .map((st, idx) => {
+        const existing = originalSubtasks.find((orig: any) => orig.title.toLowerCase() === st.toLowerCase());
+        if (existing) {
+          return { ...existing, title: st };
+        } else {
+          return { id: idx + 1, title: st, isCompleted: false };
+        }
+      });
 
-    if (!column.tasks) {
-      column.tasks = [];
+    const isEdit = !!this.task();
+    if (isEdit) {
+      const taskId = this.task().id;
+      const oldCol = this.columnName() || this.task().status || '';
+      const newCol = this.status();
+      const updatedData = {
+        title: titleVal,
+        description: this.description().trim(),
+        subtasks: subtasksData
+      };
+      this.boardsService.updateTask(activeB.id, taskId, updatedData, oldCol, newCol);
+    } else {
+      const currentStatus = this.status();
+      const taskData = {
+        title: titleVal,
+        description: this.description().trim(),
+        subtasks: subtasksData
+      };
+      this.boardsService.addTask(activeB.id, currentStatus, taskData);
     }
-
-    const newTask = {
-      title: titleVal,
-      description: this.description().trim(),
-      status: column.name,
-      subtasks: subtasksData,
-      id: Math.floor(Math.random() * 1000000)
-    };
-
-    column.tasks.push(newTask);
-    this.boardsService.save();
 
     this.close.emit();
   }

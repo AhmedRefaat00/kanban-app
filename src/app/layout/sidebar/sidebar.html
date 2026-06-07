@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar" [class.hidden]="isSidebarHidden()">
   <div>
     <img class="logo" [src]="logo()" alt="Logo">
     <p>{{ 'All Boards' | uppercase }} ({{ boards().length }}) </p>
@@ -13,20 +13,28 @@
       + Create New Board
     </button>
   </div>
-  <div>
-    <!-- <div>
+  <div class="sidebar-bottom">
+    <div class="theme-toggle-card">
       <img src="icon-light-theme.svg" alt="Light Theme Icon">
-      <input type="radio" id="light" name="theme" value="light" checked>
+      <label class="switch">
+        <input type="checkbox" [checked]="isDarkMode()" (change)="toggleTheme()">
+        <span class="slider round"></span>
+      </label>
       <img src="icon-dark-theme.svg" alt="Dark Theme Icon">
-    </div> -->
+    </div>
 
-    <!-- <button>
-      <img src="icon-hide-sidebar.svg" />
-      hideSidebar
-    </button> -->
+    <button class="hide-sidebar-btn" (click)="toggleSidebar()">
+      <img src="icon-hide-sidebar.svg" alt="Hide Sidebar Icon" />
+      Hide Sidebar
+    </button>
   </div>
-
 </div>
+
+@if (isSidebarHidden()) {
+  <button class="show-sidebar-btn" (click)="toggleSidebar()">
+    <img src="icon-show-sidebar.svg" alt="Show Sidebar Icon">
+  </button>
+}
 
 @if (isCreateNewBoardClicked()) {
 <app-add-new-board-card (close)="isCreateNewBoardClicked.set(false)"></app-add-new-board-card>

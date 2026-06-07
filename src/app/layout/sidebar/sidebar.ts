@@ -16,8 +16,15 @@ export class Sidebar {
 
   boardsService = inject(BoardsService);
   boards = this.boardsService.boards;
+  isDarkMode = this.boardsService.isDarkMode;
+  isSidebarHidden = this.boardsService.isSidebarHidden;
 
+  toggleTheme() {
+    this.boardsService.toggleTheme();
+  }
 
-  
+  toggleSidebar() {
+    this.isSidebarHidden.set(!this.isSidebarHidden());
+  }
 
 }

@@ -1,11 +1,30 @@
 <div class="header">
   <h2>{{ boardName() | titlecase }}</h2>
-  <div>
-    <button (click)="isAddNewTaskClicked.set(!isAddNewTaskClicked())">+ add new task</button>
-    <img src="icon-vertical-ellipsis.svg" alt="Add">
+  <div class="header-actions">
+    <button 
+      [disabled]="!hasColumns()" 
+      [class.disabled]="!hasColumns()"
+      (click)="isAddNewTaskClicked.set(!isAddNewTaskClicked())"
+    >
+      + add new task
+    </button>
+    <div class="ellipsis-container">
+      <img src="icon-vertical-ellipsis.svg" alt="Ellipsis Icon" (click)="toggleDropdown()">
+      
+      @if (isDropdownOpen()) {
+        <div class="dropdown-menu">
+          <button (click)="onEditBoard()">Edit Board</button>
+          <button class="delete-text" (click)="onDeleteBoard()">Delete Board</button>
+        </div>
+      }
+    </div>
   </div>
 
 </div>
 @if (isAddNewTaskClicked()) {
   <app-add-new-task-card (close)="isAddNewTaskClicked.set(false)"></app-add-new-task-card>
+}
+
+@if (isEditBoardClicked()) {
+  <app-add-new-board-card [boardId]="boardsService.activeBoardId()" (close)="isEditBoardClicked.set(false)"></app-add-new-board-card>
 }

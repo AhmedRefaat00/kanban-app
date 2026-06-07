@@ -1,6 +1,6 @@
 <div class="overlay" (click)="onBackdropClick($event)">
   <div class="modal">
-    <h3>Add New Board</h3>
+    <h3>{{ boardId() ? 'Edit Board' : 'Add New Board' }}</h3>
     <form (submit)="onSubmit($event)">
       <div class="form-group">
         <label for="board-name">Board Name</label>
@@ -12,6 +12,7 @@
           (input)="boardName.set($any($event.target).value)"
           placeholder="e.g. Web Design" 
           required 
+          autofocus
         />
       </div>
 
@@ -22,7 +23,7 @@
             <div class="column-row">
               <input 
                 type="text" 
-                [value]="column" 
+                [value]="column.name" 
                 (input)="updateColumn($index, $any($event.target).value)"
                 placeholder="e.g. Todo" 
                 required
@@ -36,8 +37,7 @@
         <button class="btn btn-secondary" type="button" (click)="addColumn()">+ Add New Column</button>
       </div>
 
-      <button class="btn btn-primary" type="submit">Create New Board</button>
+      <button class="btn btn-primary" type="submit">{{ boardId() ? 'Save Changes' : 'Create New Board' }}</button>
     </form>
   </div>
 </div>
-

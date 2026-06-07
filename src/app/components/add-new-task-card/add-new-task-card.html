@@ -1,6 +1,6 @@
 <div class="overlay" (click)="onBackdropClick($event)">
   <div class="modal">
-    <h3>Add New Task</h3>
+    <h3>{{ task() ? 'Edit Task' : 'Add New Task' }}</h3>
     <form (submit)="onSubmit($event)">
       <div class="form-group">
         <label for="task-title">Title</label>
@@ -62,7 +62,7 @@
         </select>
       </div>
 
-      <button class="btn btn-primary" type="submit">Create Task</button>
+      <button class="btn btn-primary" type="submit">{{ task() ? 'Save Changes' : 'Create Task' }}</button>
     </form>
   </div>
 </div>
