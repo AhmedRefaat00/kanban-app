@@ -1,17 +1,19 @@
-<div class="board">
+<div class="board" cdkDropListGroup>
   @if(board()?.columns?.length)
   {
   @for(column of board().columns; track column.name)
   {
   <section class="column">
-    <h2>{{ column.name }}</h2>
+    <h2>{{ column.name }} ({{ column.tasks?.length || 0 }})</h2>
 
-    @if(column.tasks?.length)
-    {
-    <div class="tasks">
+    <div class="tasks"
+         cdkDropList
+         [id]="column.name"
+         [cdkDropListData]="column.tasks"
+         (cdkDropListDropped)="drop($event, column.name)">
       @for(task of column.tasks; track task.id)
       {
-      <article class="task" (click)="toggleActiveTask(task.id)">
+      <article class="task" cdkDrag (click)="toggleActiveTask(task.id)">
         <div class="task-header">
           <h3>{{ task.title }}</h3>
 
@@ -29,12 +31,12 @@
         }
       </article>
       }
+
+      @if(!column.tasks?.length)
+      {
+      <p class="empty-column">No tasks in this column yet.</p>
+      }
     </div>
-    }
-    @else
-    {
-    <p class="empty-column">No tasks in this column yet.</p>
-    }
   </section>
   }
   }

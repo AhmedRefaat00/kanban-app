@@ -218,6 +218,35 @@ export class BoardsService {
     }
   }
 
+  moveTask(boardId: number, previousColumnName: string, currentColumnName: string, previousIndex: number, currentIndex: number) {
+    const current = this.boards();
+    const board = current.find(b => b.id === boardId);
+    if (!board) return;
+
+    const previousColumn = board.columns.find((c: any) => c.name === previousColumnName);
+    const currentColumn = board.columns.find((c: any) => c.name === currentColumnName);
+
+    if (!previousColumn || !currentColumn) return;
+
+    if (previousColumnName === currentColumnName) {
+      const tasks = previousColumn.tasks;
+      if (tasks && previousIndex > -1 && currentIndex > -1) {
+        const [movedTask] = tasks.splice(previousIndex, 1);
+        tasks.splice(currentIndex, 0, movedTask);
+      }
+    } else {
+      const previousTasks = previousColumn.tasks || [];
+      const currentTasks = currentColumn.tasks || [];
+      if (previousIndex > -1) {
+        const [movedTask] = previousTasks.splice(previousIndex, 1);
+        movedTask.status = currentColumnName;
+        currentTasks.splice(currentIndex, 0, movedTask);
+      }
+    }
+    this.boards.set([...current]);
+    this.saveBoards();
+  }
+
   save() {
     this.boards.set([...this.boards()]);
     this.saveBoards();
