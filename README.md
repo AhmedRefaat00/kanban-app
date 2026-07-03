@@ -1,59 +1,92 @@
-# KanbanApp
+# 📋 Kanban Task Management Board
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.9.
+A sleek, premium Kanban task management application built using modern Angular. The application features support for custom boards, column creation, detailed task details, subtask tracking, dark/light theme switching, and seamless drag-and-drop mechanics.
 
-## Development server
+---
+
+## ✨ Features
+
+- **Interactive Kanban Board**: Dynamic board layouts that scale to fit any viewport screen size.
+- **Drag and Drop**: Seamlessly move tasks between columns or reorder them within a column using `@angular/cdk/drag-drop`.
+- **Dynamic Board Management**:
+  - Add, edit, and delete boards.
+  - Custom column additions and updates.
+- **Task Management**:
+  - Add detailed tasks with titles, descriptions, and customizable subtasks.
+  - Mark subtasks as completed directly from the task detail modal.
+  - Move tasks manually or edit/delete tasks.
+- **Theme Toggle**: Beautiful dark and light modes styled with cohesive CSS variables.
+- **State Persistence**: All boards, columns, tasks, and settings are saved automatically using `localStorage`.
+
+---
+
+## 🛠️ Technology Stack
+
+- **Framework**: [Angular v21](https://angular.dev/) (Standalone Components, Signals, Computed properties)
+- **Drag and Drop**: [@angular/cdk](https://material.angular.io/cdk/categories)
+- **Styling**: Vanilla CSS with custom design system variables
+- **Testing**: [Vitest](https://vitest.dev/)
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Make sure you have [Node.js](https://nodejs.org/) installed.
+
+### Installation
+
+1. Clone or download the repository:
+   ```bash
+   git clone <repository-url>
+   cd kanban-app
+   ```
+
+2. Install the project dependencies:
+   ```bash
+   npm install
+   ```
+
+### Running Locally
 
 To start a local development server, run:
-
 ```bash
-ng serve
+npm run start
 ```
+Once started, navigate to `http://localhost:4200/` in your browser. The application will reload automatically upon modifying files.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
+### Building
 
 To build the project run:
-
 ```bash
-ng build
+npm run build
+```
+Build outputs will be compiled and stored inside the `dist/kanban-app` directory.
+
+### Running Tests
+
+To run unit tests using the Vitest test runner:
+```bash
+npm run test
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## 📂 Project Structure
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+src/
+├── app/
+│   ├── components/       # Reusable UI elements (cards, headers, buttons)
+│   ├── layout/           # Sidebar and header layouts
+│   ├── pages/            # Core pages (board page layout)
+│   ├── services/         # State management services (boards.service.ts)
+│   ├── app.routes.ts     # Router configuration
+│   ├── app.ts            # Main application bootstrap component
+│   └── app.css           # Global layout styling
+├── data/
+│   └── data.json         # Mock data fallback
+└── models/
+    └── boards.model.ts   # Board model typescript interfaces
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
